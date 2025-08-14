@@ -3,7 +3,8 @@
         "utility": "cpp",
         "ios": "cpp",
         "xiosbase": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "vector": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
