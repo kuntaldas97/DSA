@@ -1,7 +1,7 @@
 #include <iostream>
 
 using namespace std;
-class Node
+class Node 
 {
 public:
     int data;
@@ -18,31 +18,35 @@ public:
     }
 };
 //  creating tail using function
-void createTail(Node* &Head, Node* &tail){
-    Node* temp = Head;
+void createTail(Node *&Head, Node *&tail)
+{
+    Node *temp = Head;
 
-    while(temp != NULL){
-        temp=temp->next;
+    while (temp != NULL)
+    {
+        temp = temp->next;
     }
-    tail=temp;
+    tail = temp;
 }
-int countNodes(Node* &head){
-    Node* temp=head;
+int countNodes(Node *&head)
+{
+    Node *temp = head;
     int nodeCount = 0;
-    while(temp!=NULL){
-        temp=temp->next;
+    while (temp != NULL)
+    {
+        temp = temp->next;
         nodeCount++;
     }
     return nodeCount;
 }
-void insertAtHead(Node *&Head,Node* &tail, int dataHead)
+void insertAtHead(Node *&Head, Node *&tail, int dataHead)
 {
 
     //  for handling the case of empty node
     if (Head == NULL)
     {
         //  creation of new node
-        Node* newHeadNode = new Node(dataHead);
+        Node *newHeadNode = new Node(dataHead);
         //  making the new node as head node.
         Head = newHeadNode;
         // also making the new node as tail node
@@ -51,7 +55,7 @@ void insertAtHead(Node *&Head,Node* &tail, int dataHead)
     else
     {
         //  creation of new node
-        Node* newHeadNode = new Node(dataHead);
+        Node *newHeadNode = new Node(dataHead);
         //  Storing the address of the next node.
         newHeadNode->next = Head;
         //  making the new node as head node.
@@ -59,12 +63,13 @@ void insertAtHead(Node *&Head,Node* &tail, int dataHead)
     }
 }
 
-void insertAtTail(Node* &Head, Node* &tail, int dataTail){
-     //  for handling the case of empty node
+void insertAtTail(Node *&Head, Node *&tail, int dataTail)
+{
+    //  for handling the case of empty node
     if (Head == NULL)
     {
         //  creation of new node
-        Node* newTailNode = new Node(dataTail);
+        Node *newTailNode = new Node(dataTail);
         //  making the new node as head & tail  node.
         Head = newTailNode;
         tail = newTailNode;
@@ -72,44 +77,48 @@ void insertAtTail(Node* &Head, Node* &tail, int dataTail){
     else
     {
         //  creation of new node
-        Node* newTailNode = new Node(dataTail);
+        Node *newTailNode = new Node(dataTail);
         //  Storing the address of the next node.
-        tail->next=newTailNode;
+        tail->next = newTailNode;
         //  making the new node as head node.
-        tail =newTailNode;
+        tail = newTailNode;
     }
 }
-void insertAtAnyPos(Node* &head, Node* &tail, int pos, int data){
+void insertAtAnyPos(Node *&head, Node *&tail, int pos, int data)
+{
 
-    int nodeCounts=countNodes(head);
-    if(pos<=1){
-    insertAtHead(head,tail,data);
+    int nodeCounts = countNodes(head);
+    if (pos <= 1)
+    {
+        insertAtHead(head, tail, data);
     }
-    if(pos>nodeCounts){
-        insertAtTail(head,tail,data);
+    if (pos > nodeCounts)
+    {
+        insertAtTail(head, tail, data);
     }
-    else{
-        Node* newNode = new Node(data);
+    else
+    {
+        Node *newNode = new Node(data);
 
-        Node* prev = NULL;
-        Node* curr = head;
+        Node *prev = NULL;
+        Node *curr = head;
 
-        while(pos!=1){
-            prev=curr;
-            curr=curr->next;
+        while (pos != 1)
+        {
+            prev = curr;
+            curr = curr->next;
             pos--;
         }
-        prev->next=newNode;
-        newNode->next=curr;
+        prev->next = newNode;
+        newNode->next = curr;
     }
-
 }
-void printNodes(Node* &head)
+void printNodes(Node *&head)
 {
     // creating a Temp node pointer to store the Node passed as a parameter and using it
     // for other operations is always the best practices.
     // While passing the Nodes in a function as pass by reference is the best practices.
-    Node* temp = head;
+    Node *temp = head;
     int nodeCount = 0;
     while (temp != NULL)
     {
@@ -135,15 +144,15 @@ int main()
     // three->next = four;
     // four->next = five;
     // Node* head = one;
-    // Node* tail = five; 
-Node* head = NULL;
-Node* tail = NULL;
-    insertAtHead(head,tail,200);
-    insertAtHead(head,tail,10);
-    insertAtHead(head,tail,20);
-    insertAtTail(head,tail,50);
+    // Node* tail = five;
+    Node *head = NULL;
+    Node *tail = NULL;
+    insertAtHead(head, tail, 200);
+    insertAtHead(head, tail, 10);
+    insertAtHead(head, tail, 20);
+    insertAtTail(head, tail, 50);
 
-insertAtAnyPos(head,tail,3,40);
+    insertAtAnyPos(head, tail, 3, 40);
     cout << "Printing the nodes." << endl;
     // printNodes(head);
     printNodes(head);
