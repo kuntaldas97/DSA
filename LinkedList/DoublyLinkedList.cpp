@@ -60,6 +60,38 @@ int countNodes(Node* &head){
     }
     return len;
 }
+void insertAtAnyPos(Node* &head, Node* &tail, int data, int pos){
+    Node* newNode = new Node(data);
+    if (head==NULL){
+        head=newNode;
+        tail=newNode;
+    }
+    else{
+        int len = countNodes(head);
+        // inserting at the begining 
+        if(pos==1){
+            insertAtHead(head,tail,data);
+        }
+        // inserting at the end
+        else if(pos>len){
+            insertAtTail(head,tail,data);
+        }
+        // inserting at middle 
+        else{
+            Node* prevNode = NULL;
+            Node* currNode = head;
+            while(pos!=1){
+                pos--;
+                prevNode=currNode;
+                currNode=currNode->next;
+            }
+            prevNode->next=newNode;
+            newNode->prev=prevNode;
+            newNode->next=currNode;
+            currNode->prev=newNode;
+        }
+    }
+}
 void printNodes(Node* &head){  
     Node* temp = head;
     while(temp!=NULL){
@@ -67,6 +99,30 @@ void printNodes(Node* &head){
         temp=temp->next;
     }
     cout << endl;
+}
+void deleteNode(Node* &head, Node* &tail, int data, int pos){
+    if(head==NULL){
+        cout << "It's an empty LL, no nodes to be deleted"<<endl;
+    }
+    if(head==tail){
+        Node* temp = head;
+        delete temp;
+        head = NULL;
+        tail = NULL;
+    }
+    int len = countNodes(head);
+    if(pos==1){
+        Node* temp = head;
+        head = head->next;
+        temp->next=NULL;
+        head->prev=NULL;
+        delete temp;
+    }
+    // else if(pos==len){
+    //     Node* temp = tail;
+    //     tail
+    // }
+
 }
 int main(){
 
@@ -79,10 +135,14 @@ int main(){
     insertAtTail(head,tail,50);
     insertAtTail(head,tail,60);
 
+    printNodes(head);
+
+    int position;
+    cout << "Enter the position to insert the new node : ";
+    cin >> position;
+
+    insertAtAnyPos(head, tail, 15, position);
 
     printNodes(head);
-    int len=countNodes(head);
-    cout << len << endl;
-
     return 0;
 }
