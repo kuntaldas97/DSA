@@ -100,10 +100,12 @@ void printNodes(Node* &head){
     }
     cout << endl;
 }
-void deleteNode(Node* &head, Node* &tail, int data, int pos){
+void deleteNode(Node* &head, Node* &tail, int pos){
+    // for empty LL
     if(head==NULL){
         cout << "It's an empty LL, no nodes to be deleted"<<endl;
     }
+    // for node size 1
     if(head==tail){
         Node* temp = head;
         delete temp;
@@ -111,17 +113,39 @@ void deleteNode(Node* &head, Node* &tail, int data, int pos){
         tail = NULL;
     }
     int len = countNodes(head);
-    if(pos==1){
+    // detlete from head
+    if(pos==1){ 
         Node* temp = head;
         head = head->next;
         temp->next=NULL;
         head->prev=NULL;
         delete temp;
     }
-    // else if(pos==len){
-    //     Node* temp = tail;
-    //     tail
-    // }
+    // delete from tail
+    else if(pos==len){
+        Node* prevNode = tail->prev;
+        prevNode->next=NULL;
+        tail->prev=NULL;
+        delete tail;
+        tail=prevNode;
+    }
+    // delete from in between
+    else{
+        Node* prevNode=NULL;
+        Node* currNode=head;
+
+        while(pos!=1){
+            pos--;
+            prevNode=currNode;
+            currNode=currNode->next;
+        }
+        Node* nextNode= currNode->next;
+        prevNode->next=nextNode;
+        nextNode->prev=prevNode;
+        currNode->next=NULL;
+        currNode->prev=NULL;
+        delete currNode;
+    }
 
 }
 int main(){
@@ -143,6 +167,10 @@ int main(){
 
     insertAtAnyPos(head, tail, 15, position);
 
+    printNodes(head);
+    cout << "Enter the position to delete the node : ";
+    cin >> position;
+    deleteNode(head,tail,position);
     printNodes(head);
     return 0;
 }
