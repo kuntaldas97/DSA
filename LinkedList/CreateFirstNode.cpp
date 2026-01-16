@@ -60,6 +60,7 @@ void insertAtHead(Node *&Head, Node *&tail, int dataHead)
         newHeadNode->next = Head;
         //  making the new node as head node.
         Head = newHeadNode;
+
     }
 }
 
