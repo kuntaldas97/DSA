@@ -1,14 +1,13 @@
 #include <iostream>
 #include <vector>
-#include <stack>
+#include<stack>
 
 using namespace std;
-
-vector <int> findNextSmallerElement(int* arr, int size, vector<int> &ans){
+vector<int> findPreviousSmallerElement(int *arr, int size, vector<int> &ans){
     stack<int>st;
     st.push(-1);
 
-    for(int i=size-1; i>=0; i--){
+    for(int i=0; i<size; i++){
         int curr = arr[i];
         while(st.top()>=curr){
             st.pop();
@@ -17,16 +16,16 @@ vector <int> findNextSmallerElement(int* arr, int size, vector<int> &ans){
 
         st.push(curr);
     }
+    
     return ans;
 }
-
 int main(){
 
     int arr[5]={8,4,6,2,3};
     int size = 5;
     vector<int>ans(size);
 
-    ans= findNextSmallerElement(arr,size,ans);
+    ans=findPreviousSmallerElement(arr,size,ans);
 
     for(auto elm : ans){
         cout << elm << " ";
