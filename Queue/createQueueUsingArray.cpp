@@ -11,6 +11,9 @@ class Queue{
     Queue(int size){
         arr = new int[size];
         this->size=size;
+        for(int i = 0; i < size; i++){
+        arr[i] = 0;
+    }
         front=-1;
         rear=-1;
     }
@@ -44,7 +47,7 @@ class Queue{
             rear=-1;
         }
         else{
-            arr[front]=1;
+            arr[front]=-1;
             front++;
         }
     }
@@ -54,7 +57,12 @@ class Queue{
         }
     }
     int getSize(){
+        if(front==-1 && rear==-1){
+            return 0;
+        }
+        else{
         return rear-front+1;
+        }
     }
     int getFront(){
         if(front==-1){
@@ -87,6 +95,41 @@ class Queue{
 int main(){
 
     Queue q(5);
+    q.print();
+
+    q.push(10);
+    q.print();
+
+    q.push(20);
+    q.print();
+
+    q.push(30);
+    q.print();
+
+    q.push(40);
+    q.print();
+
+    q.push(50);
+    q.print();
+
+    q.push(60);
+
+    int size = q.getSize();
+    cout <<"Current size of the queue is : "<< size <<endl;
+
+    q.pop();
+    q.print();
+    size=q.getSize();
+    cout <<"Current size of the queue is : "<< size <<endl;
+
+    cout << "Front = "<<q.getFront()<<", Back = "<<q.getBack()<<endl;
+    q.pop();
+    q.pop();
+    q.pop();
+    q.pop();
+    q.pop();
+    size=q.getSize();
+    cout <<"Current size of the queue is : "<< size <<endl;
     q.print();
     return 0;
 }
