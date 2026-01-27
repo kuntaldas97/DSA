@@ -10,7 +10,7 @@ class CQueue{
 
     CQueue(int size){
         arr = new int[size];
-        for(int i=0, i<size; i++){
+        for(int i=0; i<size; i++){
             arr[i]=0;
         }
         this->size=size;
@@ -20,7 +20,7 @@ class CQueue{
 
     void push(int val){
         // Overflow case
-        if(front==0 && rear==size-1){
+        if((front==0 && rear==size-1)||(rear==front-1)){
             cout<<"Queue Overflow"<<endl;
         }
         // empty case
@@ -60,9 +60,52 @@ class CQueue{
             front++;
         }
     }
+    void print(){
+        cout << "Printing Queue : "<<endl;
+        for(int i=0; i<size; i++){
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
 };
 
 int main(){
+    CQueue cq(5);
+    cq.print();
 
+    cq.push(10);
+    cq.print();
+
+    cq.push(20);
+    cq.print();
+
+    cq.push(30);
+    cq.print();
+
+    cq.push(10);
+    cq.print();
+
+    cq.push(10);
+    cq.print();
+
+    cq.push(10);
+    cq.print();
+
+    cq.pop();
+    cq.pop();
+    cq.pop();
+    cq.print();
+
+    cq.push(10);
+    cq.print();
+
+    cq.push(20);
+    cq.print();
+
+    cq.push(30);
+    cq.print();
+
+    cq.push(40);
+    cq.print();
     return 0;
 }
