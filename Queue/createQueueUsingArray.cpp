@@ -1,135 +1,131 @@
 #include <iostream>
 using namespace std;
 
-class Queue{
-    public:
+class Queue {
+public:
     int* arr;
     int size;
     int front;
     int rear;
 
-    Queue(int size){
+    Queue(int size) {
+        this->size = size;
         arr = new int[size];
-        this->size=size;
-        for(int i = 0; i < size; i++){
-        arr[i] = 0;
-    }
-        front=-1;
-        rear=-1;
+
+        for (int i = 0; i < size; i++) {
+            arr[i] = 0;
+        }
+
+        front = -1;
+        rear = -1;
     }
 
-    void push(int val){
-        // for overflow condition 
-        if(rear==size-1){
-            cout << "Queue overflow"<< endl;
+    // Destructor to prevent memory leak
+    ~Queue() {
+        delete[] arr;
+    }
+
+    void push(int val) {
+        // overflow condition
+        if (rear == size - 1) {
+            cout << "Queue Overflow" << endl;
             return;
         }
-        // empty case
-        else if(front==-1 && rear==-1){
-            front++;
+
+        // empty queue
+        if (front == -1) {
+            front = 0;
+            rear = 0;
+        } else {
             rear++;
-            arr[rear]=val;
         }
-        else{
-            rear++;
-            arr[rear]=val;
-        }
+
+        arr[rear] = val;
     }
-    void pop(){
-        // empty case
-        if(front==-1 && rear==-1){
-            cout<<"Queue Underflow"<<endl;
+
+    void pop() {
+        // underflow
+        if (front == -1) {
+            cout << "Queue Underflow" << endl;
             return;
         }
-        else if(front==rear){
-            arr[rear]=-1;
-            front=-1;
-            rear=-1;
-        }
-        else{
-            arr[front]=-1;
+
+        arr[front] = 0;
+
+        // single element
+        if (front == rear) {
+            front = -1;
+            rear = -1;
+        } else {
             front++;
         }
     }
-    bool isEmpty(){
-        if(front==-1 && rear==-1){
-            return true;
-        }
+
+    bool isEmpty() {
+        return (front == -1);
     }
-    int getSize(){
-        if(front==-1 && rear==-1){
+
+    int getSize() {
+        if (isEmpty()) {
             return 0;
         }
-        else{
-        return rear-front+1;
-        }
+        return rear - front + 1;
     }
-    int getFront(){
-        if(front==-1){
-            cout<<"Queue is empty"<<endl;
+
+    int getFront() {
+        if (isEmpty()) {
+            cout << "Queue is empty" << endl;
             return -1;
         }
-        else{
-            return arr[front];
-        }
+        return arr[front];
     }
-    int getBack(){
-        if(rear==-1){
-            cout<<"Queue is empty"<<endl;
+
+    int getBack() {
+        if (isEmpty()) {
+            cout << "Queue is empty" << endl;
             return -1;
         }
-        else{
-            return arr[rear];
-        }
+        return arr[rear];
     }
-    void print(){
-        cout << "Printing Queue : "<<endl;
-        for(int i=0; i<size; i++){
+
+    void print() {
+        cout << "Printing Queue (raw array):" << endl;
+        for (int i = 0; i < size; i++) {
             cout << arr[i] << " ";
         }
         cout << endl;
     }
-
 };
 
-int main(){
-
+int main() {
     Queue q(5);
     q.print();
 
     q.push(10);
-    q.print();
-
     q.push(20);
-    q.print();
-
     q.push(30);
-    q.print();
-
     q.push(40);
-    q.print();
-
     q.push(50);
     q.print();
 
-    q.push(60);
+    q.push(60);   // overflow
 
-    int size = q.getSize();
-    cout <<"Current size of the queue is : "<< size <<endl;
+    cout << "Current size of the queue is : " << q.getSize() << endl;
 
+    q.pop();
     q.pop();
     q.print();
-    size=q.getSize();
-    cout <<"Current size of the queue is : "<< size <<endl;
 
-    cout << "Front = "<<q.getFront()<<", Back = "<<q.getBack()<<endl;
+    cout << "Current size of the queue is : " << q.getSize() << endl;
+    cout << "Front = " << q.getFront()
+         << ", Back = " << q.getBack() << endl;
+
     q.pop();
     q.pop();
-    q.pop();
-    q.pop();
-    q.pop();
-    size=q.getSize();
-    cout <<"Current size of the queue is : "<< size <<endl;
+    q.pop();   // underflow
     q.print();
+
+    cout << "Current size of the queue is : " << q.getSize() << endl;
+
     return 0;
 }
