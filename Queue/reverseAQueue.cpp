@@ -20,7 +20,22 @@ void reverseQueue(queue<long long int>&q){
     //     st.pop();
     // }
 
-    
+    // reverse the queue using recursion
+
+    // base case
+    if(q.empty()){
+        return;
+    }
+    // dequeue current item from front
+    long long int data = q.front();
+    q.pop();
+
+    // reverse the existing queue
+    reverseQueue(q);
+
+    // push the data to the queue
+    cout << data << " ";
+    q.push(data);
 }
 int main(){
     queue<long long int> q;
