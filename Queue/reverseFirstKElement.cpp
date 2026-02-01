@@ -5,11 +5,13 @@
 using namespace std;
 void reverseKElements(queue<long long int> &q, int k){
 
+    int restElm=q.size()-k;
     if(q.empty() || k>q.size() || k<0){
+        cout << "Either the queue is empty or You have entered a wrong input!"<< endl;
         return;
     }
-    stack<int> st;
-    while (k>=0){
+    stack<long long int> st;
+    while (k>0){
         st.push(q.front());
         q.pop();
         k--;
@@ -18,8 +20,7 @@ void reverseKElements(queue<long long int> &q, int k){
         q.push(st.top());
         st.pop();
     }
-    int restElm=q.size()-k;
-    while(restElm>=0){
+    while(restElm>0){
         q.push(q.front());
         q.pop();
         restElm--;
@@ -37,7 +38,7 @@ int main(){
     q.push(60);
 
     int k;
-    cout << "Enter the value of k to be reversed "<<endl;
+    cout << "Enter the value of k to be reversed : ";
     cin >> k;
 
     reverseKElements(q, k);
