@@ -39,58 +39,9 @@ Node* createTree(){
     }
 
 }
-void preOrderTraversal(Node* root){
-    // Base case if Node is Null then return
-    if(root==NULL){
-        return;
-    }
-    else{
-    // N(printing the current node data)
-        cout << root->data<<" ";
-    // L(go for the left Node)
-        preOrderTraversal(root->left);
-    // R(go for the right Node)
-        preOrderTraversal(root->right);
-    }
-}
-void inOrderTraversal(Node* root){
-    // Base case if Node is Null then return
-    if(root==NULL){
-        return;
-    }
-    else{
-    // L(go for the left Node)
-    inOrderTraversal(root->left);
-    // N(Printing the current Node data)
-    cout << root->data<<" ";
-    // R(go for the right Node)
-    inOrderTraversal(root->right);
-    }
-}
-void postOrderTraversal(Node* root){
-    // Base case if Node is Null then return
-    if(root==NULL){
-        return;
-    }
-    else{
-    // L(go for the left Node)
-    postOrderTraversal(root->left);
-    // R(go for the right Node)
-    postOrderTraversal(root->right);
-    // N(printing gthe current current node data)
-    cout << root->data<<" ";
-    }
-    
-}
+
 int main(){
     Node* root=createTree();
-    cout << endl;
-    preOrderTraversal(root);
-    cout << endl;
-    inOrderTraversal(root);
-    cout << endl;
-    postOrderTraversal(root);
-    cout << endl;
     return 0;
 }
 
