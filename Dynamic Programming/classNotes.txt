@@ -1,0 +1,14 @@
+DP problems can be solved in three ways
+    1. Top Down (Recursion + Memoaization)
+    2. Bottom Up (Tabulation method)
+    3. Patterns (Space Optimization)
+
+Major steps in  Top Down approach
+    1. Create an DP array
+    2. store and return ans in dp array
+    3. If the ans is already exits in dp array then return
+
+Major steps in Tabulation approach
+    1. Create an DP array
+    2. analyse the base case and fillthe dp array accordingly
+    3. Fill the remaining DP array using the logic/formula of recursive relation
